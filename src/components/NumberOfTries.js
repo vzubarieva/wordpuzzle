@@ -1,7 +1,7 @@
 import React from "react";
 
 function NumberOfTries() {
-  const numberOfTries = 0;
+  const numberOfTries = 6;
   return <h1>{numberOfTries}</h1>;
 }
 

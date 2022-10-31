@@ -29,12 +29,14 @@ function LettersOfAlphabet() {
     "Y",
     "Z",
   ];
+
   const handleClick = (letter) => {
     return () => {
       console.log(`clicked ${letter}`);
       // TODO: dispatch an action
     };
   };
+
   return (
     <>
       {letters.map((x) => (
