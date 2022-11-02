@@ -1,7 +1,21 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function WordToGuess() {
-  return <h1>_ _ _</h1>;
+function WordToGuess1(props) {
+  return (
+    <h1>
+      {props.word.split("").map((letter) => {
+        if (props.selectedLetters.includes(letter)) {
+          return letter;
+        }
+        return "-";
+      })}
+    </h1>
+  );
 }
 
-export default WordToGuess;
+WordToGuess1.propTypes = {
+  word: PropTypes.string,
+  selectedLetters: PropTypes.arrayOf(PropTypes.string),
+};
+export default WordToGuess1;

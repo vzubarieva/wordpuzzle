@@ -13,7 +13,7 @@ class GameControl extends React.Component {
     this.state = {
       numberOfTries: 6,
       currentWord: "",
-      selectedLetter: [],
+      selectedLetters: [],
       wordsToGuess: [
         "CAT",
         "RAT",
@@ -29,19 +29,47 @@ class GameControl extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.handleNewGameClick();
+  }
+
+  handleSelect = (letter) => {
+    const newSelectedLetters = this.state.selectedLetters.concat(letter);
+    this.setState({
+      selectedLetters: newSelectedLetters,
+      numberOfTries: this.state.numberOfTries - 1,
+    });
+  };
+
+  handleNewGameClick = () => {
+    const randomWord =
+      this.state.wordsToGuess[
+        Math.floor(Math.random() * this.state.wordsToGuess.length)
+      ];
+    this.setState({
+      numberOfTries: 6,
+      currentWord: randomWord,
+      selectedLetters: [],
+    });
+  };
+
+  // randomWord = () => {
+
+  // };
+
   render() {
     return (
       <>
         <GameRules />
-        <NewGame />
+        <NewGame clickNewGame={this.handleNewGameClick} />
         <LettersOfAlphabet
           letter={this.letter}
-          onSelect={this.handleClick}
-          selectedLetter={this.state.selectedLetter}
+          onSelect={this.handleSelect}
+          selectedLetters={this.state.selectedLetters}
         />
         <WordToGuess
           word={this.state.currentWord}
-          selectedLetter={this.state.selectedLetter}
+          selectedLetters={this.state.selectedLetters}
         />
 
         <NumberOfTries value={this.state.numberOfTries} />
@@ -53,7 +81,7 @@ class GameControl extends React.Component {
 GameControl.propTypes = {
   numberOfTries: PropTypes.number,
   currentWord: PropTypes.string,
-  selectedLetter: PropTypes.array,
+  selectedLetters: PropTypes.array,
   wordsToGuess: PropTypes.array,
 };
 

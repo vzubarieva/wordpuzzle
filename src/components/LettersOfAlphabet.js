@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function LettersOfAlphabet() {
+function LettersOfAlphabet(props) {
   const letters = [
     "A",
     "B",
@@ -34,6 +35,7 @@ function LettersOfAlphabet() {
     return () => {
       console.log(`clicked ${letter}`);
       // TODO: dispatch an action
+      props.onSelect(letter);
     };
   };
 
@@ -47,5 +49,8 @@ function LettersOfAlphabet() {
     </>
   );
 }
-
+LettersOfAlphabet.propTypes = {
+  onSelect: PropTypes.func,
+  selectedLetters: PropTypes.arrayOf(PropTypes.string),
+};
 export default LettersOfAlphabet;
